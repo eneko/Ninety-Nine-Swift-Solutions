@@ -2,7 +2,7 @@ extension List {
     /** P07 (**) Flatten a nested linked list structure.
      - returns: List<T> the list flattened
      - author: Henrique Valcanaia (`henriqueindalencio@gmail.com`)
-     - complexity: unknown. It varies according to nesting level and number of elements
+     - complexity: Varies according to nesting level
      - difficulty: 2/3
      */
     func flatten() -> List<T> {
