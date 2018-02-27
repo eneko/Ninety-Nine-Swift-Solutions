@@ -1,4 +1,4 @@
-extension List where T: Equatable {
+extension List {
     /** P07 (**) Flatten a nested linked list structure.
      - returns: List<T> the list flattened
      - author: Henrique Valcanaia (`henriqueindalencio@gmail.com`)
