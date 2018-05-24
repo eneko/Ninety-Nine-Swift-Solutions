@@ -8,6 +8,7 @@
 import Utility
 import Basic
 import Command
+import SolutionTester
 
 struct UsernameCommand: Command {
 
@@ -28,7 +29,7 @@ struct UsernameCommand: Command {
         } else if let username = Username() {
             Logger.log("Username: \(username.value)")
         } else {
-            Username.printError()
+            printUsernameError()
         }
     }
 
