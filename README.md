@@ -8,7 +8,7 @@ Ready for the challenge? Let's get started!
 
 ## Ninety-Nine Swift Problems
 
-The full list of Ninety-Nine Swift Problems can be found at http://enekoalonso.com/projects/99-swift-problems
+The full list of Ninety-Nine Swift Problems can be found at https://enekoalonso.com/projects/99-swift-problems
 
 ## Step 1: Fork this repository
 
