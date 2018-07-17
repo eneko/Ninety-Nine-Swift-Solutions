@@ -5,7 +5,7 @@ public struct Solutions {
     public static func loadSolutions(username: String) -> [String] {
         let destination = "Solutions/\(username)/"
         let files = (try? FileManager.default.contentsOfDirectory(atPath: destination)) ?? []
-        return files.filter { $0.hasSuffix(".swift") }.flatMap { $0.components(separatedBy: "_").first }.filter { $0.isEmpty == false }.sorted()
+        return files.filter { $0.hasSuffix(".swift") }.compactMap { $0.components(separatedBy: "_").first }.filter { $0.isEmpty == false }.sorted()
     }
 
     public static func createFolder(username: String) throws {
