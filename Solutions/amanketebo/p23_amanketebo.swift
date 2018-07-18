@@ -9,7 +9,7 @@ extension List {
 
         for _ in 0..<amount {
             guard listLength >= 1 else { return selectedList }
-            let randomNumber = Int.random(in: 0..<listLength)
+            let randomNumber = randomInt(under: listLength)
             let (rest, removed) = list.remove(at: randomNumber)
 
             if let removed = removed {
