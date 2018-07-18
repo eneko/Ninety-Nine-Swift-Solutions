@@ -7,6 +7,7 @@
 
 import Utility
 import Command
+import SolutionTester
 
 struct StartCommand: Command {
 
@@ -25,7 +26,7 @@ struct StartCommand: Command {
             return
         }
         guard let username = Username() else {
-            Username.printError()
+            printUsernameError()
             return
         }
         let filename = String(format: "p%02d_%@.swift", number, username.value)
