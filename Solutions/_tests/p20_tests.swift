@@ -30,6 +30,15 @@ extension SolutionTester {
                 List("a").remove(at: 1).1,
                 nil
             )
+
+            // Test to make sure original list isn't altered
+            let list = List("a", "b", "c", "d")
+            let _ = list.remove(at: 1)
+
+            assertEquals(
+                list.description,
+                List("a", "b", "c", "d").description
+            )
         }
     }
 
