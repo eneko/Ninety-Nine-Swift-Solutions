@@ -2,7 +2,7 @@ import NinetyNineSwiftProblems
 
 extension List {
     //P18 (**) Extract a slice from a linked list.
-    public func slice(from: Int, to: Int) -> List {
+    public func slice(from: Int, to: Int) -> List? {
         var resultHead: List!
         var resultTail: List!
         var iterator = self as List?
