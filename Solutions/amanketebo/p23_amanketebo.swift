@@ -4,11 +4,13 @@ extension List {
     func randomSelect(amount: Int) -> List {
         var list: List<T> = self
         var listLength = list.length
+        print("Initial list length: \(listLength)")
         var selectedList: List<T>!
         var lastElement: List<T>?
 
         for _ in 0..<amount {
             guard listLength >= 1 else { return selectedList }
+            print("List length: \(listLength)")
             let randomNumber = randomInt(under: listLength)
             let (rest, removed) = list.remove(at: randomNumber)
 
