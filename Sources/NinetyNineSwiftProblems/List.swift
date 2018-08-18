@@ -15,6 +15,14 @@ public class List<T> {
         let remaining = Array(values.dropFirst())
         nextItem = remaining.isEmpty ? nil : List(remaining)
     }
+
+    public func forEach(_ each: (T) -> Void) {
+        var current: List? = self
+        while let value = current?.value {
+            each(value)
+            current = current?.nextItem
+        }
+    }
 }
 
 /// Pretty print lists (literal array syntax)
@@ -27,6 +35,19 @@ extension List: CustomStringConvertible {
             current = current?.nextItem
         }
         return "[" + buffer.joined(separator: ", ") + "]"
+    }
+}
+
+extension List where T: Equatable {
+    public func contains(_ value: T) -> Bool {
+        var current: List? = self
+        while let currentValue = current?.value {
+            if currentValue == value {
+                return true
+            }
+            current = current?.nextItem
+        }
+        return false
     }
 }
 
