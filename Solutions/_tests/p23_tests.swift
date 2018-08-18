@@ -5,9 +5,22 @@ extension SolutionTester {
 
     // P23 (**) Extract a given number of randomly selected elements from a list.
     func testP23() {
-        //        test(List("a", "b", "c", "d", "e", "f", "g", "h").randomSelect(amount: 3).length, 3)
-        //        test(List(1, 1, 2, 3, 5, 8).randomSelect(amount: 3).length, 3)
-        //        test(List("a").randomSelect(amount: 3).length, 1)
+        Test("Extract a given number of randomly selected elements from a list.") {
+            assertEquals(
+                List("a", "b", "c", "d", "e", "f", "g", "h").randomSelect(amount: 3).length,
+                3
+            )
+            print("Passed first assert")
+            assertEquals(
+                List(1, 1, 2, 3, 5, 8).randomSelect(amount: 3).length,
+                3
+            )
+            print("Passed second assert")
+            assertEquals(
+                List("a").randomSelect(amount: 3).length,
+                1
+            )
+            print("Passed thrid assert")
+        }
     }
-
 }
