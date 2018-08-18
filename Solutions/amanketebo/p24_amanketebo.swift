@@ -1,7 +1,7 @@
 import NinetyNineSwiftProblems
 
 extension List {
-    class func lotto(numbers: Int, _ maximum: Int) -> List<Int> {
+    class func lotto(numbers: Int, maximum: Int) -> List<Int> {
         var lottoList: List<Int>!
         var lastElement: List<Int>?
 

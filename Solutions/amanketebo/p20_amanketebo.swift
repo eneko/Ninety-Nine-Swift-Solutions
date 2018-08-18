@@ -2,7 +2,8 @@ import NinetyNineSwiftProblems
 
 extension List {
     func remove(at position: Int) -> (rest: List?, removed: T?) {
-        let list: List? = self
+        var list: List!
+        var listLastElement: List?
         var current: List? = self
         var currentPosition = 0
         var removed: T?
@@ -11,12 +12,19 @@ extension List {
             return (list?.nextItem, current?.value)
         }
 
-        while let _ = current?.value {
-            if currentPosition + 1 == position {
-                removed = current?.nextItem?.value
-                current?.nextItem = current?.nextItem?.nextItem
+        while let value = current?.value {
+            if currentPosition == position {
+                removed = value
+            } else {
+                let element = List<T>(value)
 
-                return (list, removed)
+                if list == nil {
+                    list = element
+                } else {
+                    listLastElement?.nextItem = element
+                }
+
+                listLastElement = element
             }
 
             currentPosition += 1
