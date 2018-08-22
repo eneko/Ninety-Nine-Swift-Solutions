@@ -1,6 +1,9 @@
 import Foundation
 
 public func randomInt(under limit: Int) -> Int {
+    if limit < 2 {
+        return 0
+    }
     #if os(Linux)
         assert(limit != 0)
         srandom(UInt32(time(nil)))
