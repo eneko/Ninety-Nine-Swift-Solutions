@@ -2,6 +2,7 @@ import Foundation
 import NinetyNineSwiftProblems
 import Command
 import Basic
+import Logger
 
 var passes = 0
 var failures = 0
@@ -18,23 +19,23 @@ public class SolutionTester {
         let expectation = isEqualTo()
         if value == expectation {
             passes += 1
-            Logger.log("[" + "PASS".green + "] \(function) '\(desc)' passed (\(duration.secs)) " + "✔".green)
+            Logger.standard.log("[" + "PASS".green + "] \(function) '\(desc)' passed (\(duration.secs)) " + "✔".green)
         } else {
             failures += 1
-            Logger.log("[" + "FAIL".red + "] \(function) '\(desc)' failed: " + "\(value.unwrapped) != \(expectation.unwrapped)".red + " (\(duration.secs)) " + "ⅹ".red)
+            Logger.standard.log("[" + "FAIL".red + "] \(function) '\(desc)' failed: " + "\(value.unwrapped) != \(expectation.unwrapped)".red + " (\(duration.secs)) " + "ⅹ".red)
         }
         totalDuration += duration
     }
 
     public func showResults() {
-        Logger.log("")
+        Logger.standard.log("")
         let totalTests = passes + failures
         if failures == 0 {
-            Logger.log("  ✔ OK ".green + "> executed \(totalTests) tests, with \(failures) failures in \(totalDuration.secs)")
+            Logger.standard.log("  ✔ OK ".green + "> executed \(totalTests) tests, with \(failures) failures in \(totalDuration.secs)")
         } else {
-            Logger.log("  ⅹ FAIL ".red + "> executed \(totalTests) tests, with \(failures) failures in \(totalDuration.secs)")
+            Logger.standard.log("  ⅹ FAIL ".red + "> executed \(totalTests) tests, with \(failures) failures in \(totalDuration.secs)")
         }
-        Logger.log("")
+        Logger.standard.log("")
     }
 
     public var exitCode: Int32 {
@@ -58,9 +59,9 @@ public class SolutionTester {
             let deltaPasses = passes - beforePasses
             let deltaDuration = totalDuration - beforeDuration
             if deltaFailures > 0 {
-                Logger.log("[" + "FAIL".red + "] \(function) '\(desc)' failed: \(deltaFailures) failures (\(deltaDuration.secs)) " + "ⅹ".red)
+                Logger.standard.log("[" + "FAIL".red + "] \(function) '\(desc)' failed: \(deltaFailures) failures (\(deltaDuration.secs)) " + "ⅹ".red)
             } else if passes > beforePasses {
-                Logger.log("[" + "PASS".green + "] \(function) '\(desc)' passed: \(deltaPasses) assertions (\(deltaDuration.secs)) " + "✔".green)
+                Logger.standard.log("[" + "PASS".green + "] \(function) '\(desc)' passed: \(deltaPasses) assertions (\(deltaDuration.secs)) " + "✔".green)
             } else {
                 // No tests?
             }
@@ -76,7 +77,7 @@ public class SolutionTester {
             passes += 1
         } else {
             failures += 1
-            Logger.log("[" + "FAIL".red + "] assertion failed: " + "\(value.unwrapped) != \(expectation.unwrapped)".red + " (\(duration.secs)) " + "ⅹ".red)
+            Logger.standard.log("[" + "FAIL".red + "] assertion failed: " + "\(value.unwrapped) != \(expectation.unwrapped)".red + " (\(duration.secs)) " + "ⅹ".red)
         }
         totalDuration += duration
     }

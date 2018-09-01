@@ -2,33 +2,34 @@ import Foundation
 import Command
 import Rainbow
 import SolutionTester
+import Logger
 
 let arguments = ProcessInfo.processInfo.arguments
 
 func printUserInfo(username: String) {
-    Logger.log("Username: " + username.green)
+    Logger.standard.log("Username: " + username.green)
     let solutions: [String] = Solutions.loadSolutions(username: username)
     if solutions.isEmpty {
         printStartSolvingInstructions()
     } else {
-        Logger.log("Problems solved: " + "\(solutions.count)".green)
-        Logger.log("You are all set!".green)
-        Logger.log()
+        Logger.standard.log("Problems solved: " + "\(solutions.count)".green)
+        Logger.standard.log("You are all set!".green)
+        Logger.standard.log()
         printStartSolvingNextInstructions()
     }
 }
 
 func setupUser(username: String) {
-    Logger.log("Setting up user: \(username)")
+    Logger.standard.log("Setting up user: \(username)")
     let path = "Solutions/\(username)"
     do {
         try Username.set(username: username)
     } catch {
-        Logger.log("Error: failed to write username configuration".red)
+        Logger.standard.log("Error: failed to write username configuration".red)
         exit(-1)
     }
     if FileManager.default.fileExists(atPath: path) {
-        Logger.log("Solutions directory found at '\(path)'")
+        Logger.standard.log("Solutions directory found at '\(path)'")
         printSetupComplete()
         printStartSolvingInstructions()
         return
@@ -38,7 +39,7 @@ func setupUser(username: String) {
         try Solutions.createFolder(username: username)
         try Solutions.writeMain(username: username, solutions: [])
     } catch {
-        Logger.log("Error: failed to create solutions folder at '\(path)'".red)
+        Logger.standard.log("Error: failed to create solutions folder at '\(path)'".red)
         exit(-1)
     }
 }

@@ -8,6 +8,7 @@
 import Utility
 import Command
 import SolutionTester
+import Logger
 
 struct StartCommand: Command {
 
@@ -30,7 +31,7 @@ struct StartCommand: Command {
             return
         }
         let filename = String(format: "p%02d_%@.swift", number, username.value)
-        Logger.log("Creating template for problem #\(number) at \(filename)")
+        Logger.standard.log("Creating template for problem #\(number) at \(filename)")
     }
 
 }

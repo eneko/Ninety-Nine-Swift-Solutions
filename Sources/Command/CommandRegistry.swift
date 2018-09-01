@@ -8,6 +8,8 @@
 import Foundation
 import Utility
 import Basic
+import Rainbow
+import Logger
 
 public struct CommandRegistry {
 
@@ -27,9 +29,9 @@ public struct CommandRegistry {
             let parsedArguments = try parse()
             try process(arguments: parsedArguments)
         } catch let error as ArgumentParserError {
-            Logger.error(error.description.red)
+            Logger.error.log(error.description.red)
         } catch let error {
-            Logger.error(error.localizedDescription.red)
+            Logger.error.log(error.localizedDescription.red)
         }
     }
 

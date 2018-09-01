@@ -2,6 +2,7 @@ import Foundation
 import Basic
 import Command
 import SolutionTester
+import Logger
 
 struct TestRunner {
 
@@ -24,7 +25,7 @@ struct TestRunner {
 
     private func runTests(usernames: [String]) throws {
         if usernames.isEmpty {
-            Logger.log("Could not find any tests to run :(")
+            Logger.standard.log("Could not find any tests to run :(")
             return
         }
         try usernames.forEach(runTests)
@@ -33,14 +34,14 @@ struct TestRunner {
     private func runTests(username: String) throws {
         let solutions = Solutions.loadSolutions(username: username)
         guard solutions.isEmpty == false else {
-            Logger.log("Bummer, could not find any solutions for user '\(username)' at Solutions/\(username)".red)
-            Logger.log()
+            Logger.standard.log("Bummer, could not find any solutions for user '\(username)' at Solutions/\(username)".red)
+            Logger.standard.log()
             printSetupInstructions()
             printStartSolvingInstructions()
             printCourage()
             return
         }
-        Logger.log("Running tests for: ".blue + username)
+        Logger.standard.log("Running tests for: ".blue + username)
         try Solutions.createFolder(username: username)
         try Solutions.writeMain(username: username, solutions: solutions)
         try copyTestFiles(username: username, solutions: solutions)
@@ -60,7 +61,7 @@ struct TestRunner {
         let result = try process.waitUntilExit()
         switch result.exitStatus {
         case let .signalled(signal):
-            Logger.error("Test process was stopped with signal code \(signal))")
+            Logger.error.log("Test process was stopped with signal code \(signal))")
             exit(-1)
         case let .terminated(code) where code != 0:
             exit(code)

@@ -9,6 +9,7 @@ import Utility
 import Basic
 import Command
 import SolutionTester
+import Logger
 
 struct UsernameCommand: Command {
 
@@ -25,9 +26,9 @@ struct UsernameCommand: Command {
     func run(with arguments: ArgumentParser.Result) throws {
         if let username = arguments.get(username) {
             try Username.set(username: username)
-            Logger.log("Username has been set to '\(username)'")
+            Logger.standard.log("Username has been set to '\(username)'")
         } else if let username = Username() {
-            Logger.log("Username: \(username.value)")
+            Logger.standard.log("Username: \(username.value)")
         } else {
             printUsernameError()
         }

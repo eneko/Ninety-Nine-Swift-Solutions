@@ -1,4 +1,4 @@
-// swift-tools-version:4.0
+// swift-tools-version:4.2
 import PackageDescription
 import Foundation
 
@@ -12,13 +12,16 @@ let products: [Product] = [
 
 let packageDependencies: [PackageDescription.Package.Dependency] = [
     .package(url: "https://github.com/apple/swift-package-manager.git", from: "0.1.0"),
-    .package(url: "https://github.com/onevcat/Rainbow", from: "3.0.0")
+    .package(url: "https://github.com/onevcat/Rainbow", from: "3.0.0"),
+    .package(url: "https://github.com/eneko/Logger", from: "0.0.0"),
 ]
 
-let targetDependencies: [Target.Dependency] = ["Command", "NinetyNineSwiftProblems", "SolutionTester", "Utility"]
+let targetDependencies: [Target.Dependency] = [
+	"Command", "NinetyNineSwiftProblems", "SolutionTester", "Utility", "Logger"
+]
 
 let defaultTargets: [Target] = [
-    .target(name: "Command", dependencies: ["Utility"]),
+    .target(name: "Command", dependencies: ["Utility", "Logger"]),
     .target(name: "NinetyNineSwiftProblems", dependencies: []),
     .target(name: "SolutionTester", dependencies: ["Command", "NinetyNineSwiftProblems", "Rainbow", "Utility"]),
     .target(name: "runner", dependencies: targetDependencies),
