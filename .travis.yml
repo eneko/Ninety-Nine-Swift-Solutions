@@ -3,14 +3,16 @@ language: generic
 matrix:
   include:
     - os: linux
+      name: Ubuntu Trusty
       dist: trusty
       sudo: required
     - os: osx
-      osx_image: xcode9.4
+      name: macOS (Xcode10)
+      osx_image: xcode10
 
 install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swiftenv install 4.2; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swiftenv install 4.2-dev; fi
   - swift --version
   - bundle install
 
