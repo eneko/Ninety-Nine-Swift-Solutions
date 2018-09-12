@@ -12,21 +12,6 @@ public class SolutionTester {
 
     public init() {}
 
-    public func test<T: Equatable>(_ expression: @autoclosure () -> T?, equals isEqualTo: @autoclosure () -> T?, _ desc: String, function: StaticString = #function) {
-        let (value, duration) = meassure {
-            expression()
-        }
-        let expectation = isEqualTo()
-        if value == expectation {
-            passes += 1
-            Logger.standard.log("[" + "PASS".green + "] \(function) '\(desc)' passed (\(duration.secs)) " + "✔".green)
-        } else {
-            failures += 1
-            Logger.standard.log("[" + "FAIL".red + "] \(function) '\(desc)' failed: " + "\(value.unwrapped) != \(expectation.unwrapped)".red + " (\(duration.secs)) " + "ⅹ".red)
-        }
-        totalDuration += duration
-    }
-
     public func showResults() {
         Logger.standard.log("")
         let totalTests = passes + failures
@@ -40,12 +25,6 @@ public class SolutionTester {
 
     public var exitCode: Int32 {
         return failures == 0 ? 0 : -1
-    }
-
-    private func meassure<T>(block: () -> T) -> (T, TimeInterval) {
-        let start = Date()
-        let result = block()
-        return (result, Date().timeIntervalSince(start))
     }
 
     public struct Test {
@@ -80,6 +59,12 @@ public class SolutionTester {
             Logger.standard.log("[" + "FAIL".red + "] assertion failed: " + "\(value.unwrapped) != \(expectation.unwrapped)".red + " (\(duration.secs)) " + "ⅹ".red)
         }
         totalDuration += duration
+    }
+
+    private func meassure<T>(block: () -> T) -> (T, TimeInterval) {
+        let start = Date()
+        let result = block()
+        return (result, Date().timeIntervalSince(start))
     }
 
 }

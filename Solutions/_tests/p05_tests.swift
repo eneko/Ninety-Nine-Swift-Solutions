@@ -17,20 +17,8 @@ extension SolutionTester {
         assertEquals(list.length, reversed.length)
         let lastIndex = list.length - 1
         for i in 0...lastIndex {
-            assertEquals(getAt(list: list, index: i), getAt(list: reversed, index: lastIndex - i))
+            assertEquals(list.get(at: i) as Int?, reversed.get(at: lastIndex - i) as Int?)
         }
     }
 
-    private func getAt<T>(list: List<T>, index: Int) -> T? {
-        var count = 0
-        var current = list
-        while count < index {
-            guard let next = current.nextItem else {
-                return nil
-            }
-            count += 1
-            current = next
-        }
-        return current.value
-    }
 }

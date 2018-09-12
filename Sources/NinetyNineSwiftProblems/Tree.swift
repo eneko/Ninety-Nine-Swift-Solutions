@@ -1,4 +1,6 @@
-public class Tree<T>: CustomStringConvertible {
+import Foundation
+
+public class Tree<T> { //}: CustomStringConvertible {
     let value: T
     var left: Tree<T>?
     var right: Tree<T>?
@@ -9,19 +11,19 @@ public class Tree<T>: CustomStringConvertible {
         self.right = right
     }
 
-    public var description: String {
-        if left != nil && right != nil {
-            return "T(\(value) \(left!) \(right!))"
-        } else if left != nil {
-            return "T(\(value) \(left!) .)"
-        } else if right != nil {
-            return "T(\(value) . \(right!))"
-        }
-        return "T(\(value) . .)"
-    }
+//    public var description: String {
+//        if left != nil && right != nil {
+//            return "T(\(value) \(left!) \(right!))"
+//        } else if left != nil {
+//            return "T(\(value) \(left!) .)"
+//        } else if right != nil {
+//            return "T(\(value) . \(right!))"
+//        }
+//        return "T(\(value) . .)"
+//    }
 }
 
-public class PositionedTree<T> : Tree<T> {
+public class PositionedTree<T>: Tree<T> {
     var column: Int
     var row: Int
 
@@ -31,9 +33,9 @@ public class PositionedTree<T> : Tree<T> {
         super.init(value, left, right)
     }
 
-    override public var description: String {
-        let position = "T[\(column),\(row)]"
-        let tree = super.description
-        return position + tree[tree.index(after: tree.startIndex)...]
-    }
+//    override public var description: String {
+//        let position = "T[\(column),\(row)]"
+//        let tree = super.description
+//        return position + tree[tree.index(after: tree.startIndex)...]
+//    }
 }

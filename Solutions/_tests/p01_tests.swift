@@ -4,7 +4,7 @@ import SolutionTester
 extension SolutionTester {
 
     // P01 (*) Find the last element of a list.
-    public func testP01() {
+    func testP01() {
         Test("Find last element") {
             assertEquals(TestData.singleElementList.last, 1)
             assertEquals(TestData.twoElementList.last, 2)

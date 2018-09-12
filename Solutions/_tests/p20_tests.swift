@@ -33,7 +33,8 @@ extension SolutionTester {
 
             // Test to make sure original list isn't altered
             let list = List("a", "b", "c", "d")
-            let _ = list.remove(at: 1)
+            let first = list.remove(at: 1)
+            assertEquals(first.1, "b")
             assertEquals(
                 list.description,
                 List("a", "b", "c", "d").description
