@@ -1,8 +1,10 @@
-//
-//  p90_eneko.swift
-//  NinetyNineSwiftProblems
-//
-//  Created by Eneko Alonso on 9/11/18.
-//
-
 import Foundation
+import NinetyNineSwiftProblems
+
+extension MiscellaneousProblems {
+
+    static func eightQueens() -> List<Int> {
+        return List(1, 2, 3, 4, 5, 6, 7, 8)
+    }
+
+}
