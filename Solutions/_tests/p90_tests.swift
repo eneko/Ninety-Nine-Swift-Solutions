@@ -17,28 +17,51 @@ extension SolutionTester {
     func testP90() {
         Test("Eight queens problem") {
             let queens = MiscellaneousProblems.eightQueens()
-            validate(queens: queens)
+            if validate(queens: queens) == false {
+                assertFailure("Invalid queens solution: \(queens.description)")
+            }
+            else {
+                assertSuccess("Valid queens solution: \(queens.description)")
+            }
         }
     }
 
-    private func validate(queens: List<Int>) {
+    private func validate(queens: List<Int>) -> Bool {
         // Validate we have eight queens
-        assertEquals(queens.length, 8)
+        guard queens.length == 8 else {
+            return false
+        }
 
         // Columns are unique since we are using a List (only one queen per column)
 
         // Validate rows are unique
         for index in 0...7 {
             let pair = queens.remove(at: index)
-            assertEquals(pair.rest?.contains(pair.removed!), false)
+            if pair.rest?.contains(pair.removed!) == true {
+                return false
+            }
+        }
+
+        // Validate rows are in range
+        for index in 0...7 {
+            if (1...8).contains(queens[index]!) == false {
+                return false
+            }
         }
 
         // Validate diagonals
         for (queenColumn, queenRow) in queens.enumerated() {
-            for row in 0...7 {
-//                assertEquals(queens.get(at: ), <#T##isEqualTo: Equatable?##Equatable?#>)
+            for column in 0...7 where column != queenColumn {
+                let normalizedQueenRow = queenRow - 1
+                let targetQueenRow = queens.get(at: column)! - 1
+                if targetQueenRow == normalizedQueenRow - abs(queenColumn - column) ||
+                    targetQueenRow == normalizedQueenRow + abs(queenColumn - column) {
+                    return false
+                }
             }
         }
+
+        return true
     }
 
 }
