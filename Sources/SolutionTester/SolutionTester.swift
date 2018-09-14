@@ -47,12 +47,37 @@ public class SolutionTester {
         }
     }
 
+    private func meassure<T>(block: () -> T) -> (T, TimeInterval) {
+        let start = Date()
+        let result = block()
+        return (result, Date().timeIntervalSince(start))
+    }
+
+}
+
+// MARK: - Assertions
+
+extension SolutionTester {
+    public func assertSuccess(_ message: String) {
+        passes += 1
+//        Logger.standard.log("[" + "PASS".green + "] assertion success: " + "\(message)".green + " (\(0.secs)) " + "✔".green)
+    }
+
+    public func assertFailure(_ message: String) {
+        failures += 1
+        Logger.standard.log("[" + "FAIL".red + "] assertion failed: " + "\(message)".red + " (\(0.secs)) " + "ⅹ".red)
+    }
+
     public func assertEquals<T: Equatable>(_ expression: @autoclosure () -> T?, _ isEqualTo: @autoclosure () -> T?) {
+        assert(expression, isEqualTo, { $0 == $1 })
+    }
+
+    public func assert<T: Equatable>(_ expression: @autoclosure () -> T?, _ rightExpression: @autoclosure () -> T?, _ assertion: (T?, T?) -> Bool) {
         let (value, duration) = meassure {
             expression()
         }
-        let expectation = isEqualTo()
-        if value == expectation {
+        let expectation = rightExpression()
+        if assertion(value, expectation) {
             passes += 1
         } else {
             failures += 1
@@ -60,11 +85,4 @@ public class SolutionTester {
         }
         totalDuration += duration
     }
-
-    private func meassure<T>(block: () -> T) -> (T, TimeInterval) {
-        let start = Date()
-        let result = block()
-        return (result, Date().timeIntervalSince(start))
-    }
-
 }
