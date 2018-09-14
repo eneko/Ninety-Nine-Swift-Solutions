@@ -15,8 +15,7 @@ extension List where T: Equatable {
             if count == 1 {
                 newItem = List<Any>(value)
             } else {
-                // Tuples do not downcast to Any, so pack them as a List instead
-                let pack = List<Any>(count, value)
+                let pack = (count, value)
                 newItem = List<Any>(pack)
             }
             if resultList == nil {

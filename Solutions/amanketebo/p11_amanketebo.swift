@@ -23,7 +23,7 @@ extension List where T: Equatable {
             if count == 1 {
                 encodedElement = List<Any>(value)
             } else {
-                let tuple = List<Any>(count, value)
+                let tuple = (count, value)
                 encodedElement = List<Any>(tuple)
             }
 

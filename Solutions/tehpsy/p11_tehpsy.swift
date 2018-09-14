@@ -36,7 +36,7 @@ extension List where T: Equatable {
 
                 let newItem = sublistLength == 1 ?
                     List<Any>(sublistTail!.value) :
-                    List<Any>(List<Any>(sublistHead!.length, sublistTail!.value))
+                    List<Any>((sublistHead!.length, sublistTail!.value))
 
                 if resultHead == nil {
                     resultHead = newItem
